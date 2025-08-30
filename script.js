@@ -12,11 +12,15 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-// call count
+
+// call count + call history
 document.addEventListener("DOMContentLoaded", function () {
   const coinCountEl = document.getElementById("coinCount");
   let coinCount = parseInt(coinCountEl.textContent);
   const callBtns = document.querySelectorAll(".btn-call");
+
+  const historyContainer = document.getElementById("callHistoryContainer");
+  const clearBtn = document.getElementById("clearHistory");
 
   callBtns.forEach(function (btn) {
     btn.addEventListener("click", function () {
@@ -24,14 +28,43 @@ document.addEventListener("DOMContentLoaded", function () {
         const card = btn.closest(".card");
         const serviceName = card.querySelector(".service-name").textContent;
         const serviceNumber = card.querySelector(".service-num").textContent;
+
+       
+        const now = new Date();
+        const localTime = now.toLocaleTimeString();
+
         alert("Service Name: " + serviceName + "\nNumber: " + serviceNumber);
 
+      
+        const box = document.createElement("div");
+        box.className = "flex justify-between items-start bg-gray-200 p-3 rounded-lg";
+
+        box.innerHTML = `
+          <div>
+            <h2 class="font-bold">${serviceName}</h2>
+            <p class="text-gray-600">${serviceNumber}</p>
+          </div>
+          <div class="mt-4 text-right">
+            <p class="text-sm text-black">${localTime}</p>
+          </div>
+        `;
+
+        // container এ append করা
+        historyContainer.appendChild(box);
+
+        // কয়েন কমানো
         coinCount -= 20;
         coinCountEl.textContent = coinCount;
+
       } else {
         alert("Insufficient Coin");
       }
     });
+  });
+
+  // clear button
+  clearBtn.addEventListener("click", function () {
+    historyContainer.innerHTML = "";
   });
 });
 
@@ -45,8 +78,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
   copyBtns.forEach(function (btn) {
     btn.addEventListener("click", function () {
+    alert("Copied");
       copyCount++;
       copyCountEl.textContent = copyCount;
+      
+      const card = btn.closest(".card");
+      const serviceNum = card.querySelector(".service-num").textContent;
+
+      navigator.clipboard.writeText(serviceNum);
     });
   });
 });
