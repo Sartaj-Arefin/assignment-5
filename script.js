@@ -53,10 +53,8 @@ document.addEventListener("DOMContentLoaded", function () {
           </div>
         `;
 
-        // container এ append করা
-        historyContainer.appendChild(box);
+        historyContainer.prepend(box);
 
-        // কয়েন কমানো
         coinCount -= 20;
         coinCountEl.textContent = coinCount;
 
