@@ -11,9 +11,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
       heart.classList.add("text-red-500");
       heart.classList.remove("text-gray-400");
-
-      // // listener সরিয়ে দেওয়া যাতে শুধু একবারই লাল হয়
-      // heart.removeEventListener("click", handleClick);
     }); 
   }); 
 });
