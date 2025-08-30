@@ -1,16 +1,23 @@
 // heart count
-document.addEventListener("DOMContentLoaded", function () {
-  const heartCountEl = document.getElementById("heartCount");
-  let heartCount = parseInt(heartCountEl.textContent);
-  const hearts = document.querySelectorAll(".btn-heart");
+document.addEventListener("DOMContentLoaded", function () { 
+  const heartCountEl = document.getElementById("heartCount"); 
+  let heartCount = parseInt(heartCountEl.textContent); 
+  const hearts = document.querySelectorAll(".btn-heart"); 
 
-  hearts.forEach(function (heart) {
-    heart.addEventListener("click", function () {
-      heartCount++;
-      heartCountEl.textContent = heartCount;
-    });
-  });
+  hearts.forEach(function (heart) { 
+    heart.addEventListener("click", function handleClick() { 
+      heartCount++; 
+      heartCountEl.textContent = heartCount; 
+
+      heart.classList.add("text-red-500");
+      heart.classList.remove("text-gray-400");
+
+      // // listener সরিয়ে দেওয়া যাতে শুধু একবারই লাল হয়
+      // heart.removeEventListener("click", handleClick);
+    }); 
+  }); 
 });
+
 
 
 // call count + call history
